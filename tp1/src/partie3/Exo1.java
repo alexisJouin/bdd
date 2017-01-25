@@ -1,6 +1,6 @@
+package partie3;
 
 import java.sql.*;
-import java.util.Scanner;
 
 public class Exo1 {
 
@@ -44,7 +44,7 @@ public class Exo1 {
                 System.out.println("ID PERSONNE : " + selectTest.getInt("idpersonne"));
                 System.out.println("Nom : " + selectTest.getString("nompersonne"));
             }
-
+            
         } catch (SQLException err) {
             System.out.println("SQLException: " + err.getMessage());
             System.out.println("SQLState: " + err.getSQLState());
