@@ -36,7 +36,7 @@ public class Exo1 {
                             + " coeffpersonne= VALUES(coeffpersonne)");
             
 
-            st.executeUpdate("INSERT INTO grppers (idgroupe, idpersonne) VALUES(1,6),(1,7) ");
+            st.executeUpdate("INSERT INTO grppers (idgroupe, idpersonne) VALUES(1,6),(1,7) ON DUPLICATE KEY UPDATE idgroupe = VALUES(idgroupe), idpersonne = VALUES(idpersonne) ");
 
             //Affichage Test
             ResultSet selectTest = st.executeQuery("SELECT * FROM personnes");
