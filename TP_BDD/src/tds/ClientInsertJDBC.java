@@ -19,18 +19,26 @@ public class ClientInsertJDBC {
 
             //Partie connexion BDD
             Class.forName("com.mysql.jdbc.Driver");
-            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/test?user=minty&password=greatsqldb");
+
+            String URL = "jdbc:mysql://localhost:3306/";
+            String USER = "root";
+            String PASS = "root";
+            Connection connect = DriverManager.getConnection(URL, USER, PASS);
+
+            //Connection connect = DriverManager.getConnection("jdbc:derby://localhost:1527/?user=ajouin&password=10061995");
             Statement st = connect.createStatement();
 
-            int createTableProduit = st.executeUpdate("CREATE TABLE produit("
-                    + " reference primary key,"
+            int createTableProduit = st.executeUpdate("CREATE TABLE IF NOT EXISTS produit ("
+                    + " reference INTEGER PRIMARY KEY,"
                     + " designation VARCHAR(50), "
-                    + " quantite number"
-                    + " tva float,"
-                    + " prix_ht float)"
+                    + " quantite INTEGER,"
+                    + " tva FLOAT,"
+                    + " prix_ht FLOAT)"
             );
             System.out.println("SQL  : " + createTableProduit);
-            st.executeUpdate("INSERT INTO produit VALUES (0001, 'PC MM MMX', 5, 19.6, 6500)");
+            st.executeUpdate("INSERT INTO produit VALUES"
+                    + " (0001, 'PC MM MMX', 5, 19.6, 6500) ON DUPLICATE KEY IGNORE,"
+                    + " (0002, 'Imprimante HP jet', 20, 19.6, 3500) ON DUPLICATE KEY IGNORE ");
 
             ResultSet selectEx2 = st.executeQuery("SELECT reference, designation, quantite, tva, prix_ht FROM produit");
 
@@ -48,7 +56,7 @@ public class ClientInsertJDBC {
                 String typeCol = rsmd.getColumnTypeName(i);
                 System.out.println("TYPE colonne : " + typeCol);
                 String nomCol = rsmd.getColumnName(i);
-                System.out.println("TYPE colonne : " + nomCol);
+                System.out.println("NOM colonne : " + nomCol);
             }
 
             //Afficher tout le contenu de la table
@@ -60,10 +68,29 @@ public class ClientInsertJDBC {
                 System.out.println("Prix HT : " + selectEx2.getFloat("prix_ht"));
             }
 
+            //Question 3
+            System.out.println("Donner une valeur  : ");
+            String valeurSaisie = sc.nextLine();
+            int valeurSaisieInt = Integer.parseInt(valeurSaisie);
+            System.out.println("Valeur saisie : " + valeurSaisie);
+            //ResultSet selectWithCondition = st.executeQuery("SELECT reference, designation, quantite, tva, prix_ht FROM produit WHERE prix_ht > " + valeurSaisieInt);
+            PreparedStatement ps = connect.prepareStatement("SELECT reference, designation, quantite, tva, prix_ht FROM produit WHERE prix_ht > ?");
+            ps.setInt(valeurSaisieInt, 1);
+            ResultSet rs = ps.executeQuery();
+            System.out.println(rs);
+
+            //Question 4
+            System.out.println("Rentrer la requête SQL  : ");
+            String requeteSaisie = sc.nextLine();
+            System.out.println("Requête saisie : " + requeteSaisie);
+            ResultSet selectRequeteSaisie = st.executeQuery(requeteSaisie);
+
             st.close();
             connect.close();
         } catch (SQLException err) {
-            System.out.println("Erreur SQL : " + err);
+            System.out.println("SQLException: " + err.getMessage());
+            System.out.println("SQLState: " + err.getSQLState());
+            System.out.println("VendorError: " + err.getErrorCode());
         } catch (ClassNotFoundException err) {
             System.out.println("Erreur : " + err);
         }
