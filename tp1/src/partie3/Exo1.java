@@ -19,9 +19,9 @@ public class Exo1 {
             //Partie connexion BDD
             Class.forName("com.mysql.jdbc.Driver");
 
-            String URL = "jdbc:mysql://localhost:3306/mysql?autoReconnect=true&useSSL=false";
+            String URL = "jdbc:mysql://localhost:3306/tp_bdd_isidis";
             String USER = "root";
-            String PASS = "root";
+            String PASS = "";
             Connection connect = DriverManager.getConnection(URL, USER, PASS);
             Statement st = connect.createStatement();
 
