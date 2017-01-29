@@ -1,11 +1,10 @@
 package partie3;
 
-
 import java.sql.*;
 
 public class Exo2 {
 
-    public static void main(String[] args) {
+    public Exo2() {
         try {
 
             //Partie connexion BDD

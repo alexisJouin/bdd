@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Ex4 {
 
-    public static void main(String[] args) {
+    public Ex4() {
         try {
 
             //Partie connexion BDD

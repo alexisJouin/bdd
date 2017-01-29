@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Exo3 {
 
-    public static void main(String[] args) {
+    public Exo3() {
         try {
 
             //Partie connexion BDD
@@ -35,7 +35,6 @@ public class Exo3 {
             while (rs.next()) {
                 System.out.println(rs.getString("nom"));
             }
-           
 
         } catch (SQLException err) {
             System.out.println("SQLException: " + err.getMessage());
