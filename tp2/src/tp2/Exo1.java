@@ -1,12 +1,10 @@
 package tp2;
 
 import java.sql.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Date.*;
 
 public class Exo1 {
 

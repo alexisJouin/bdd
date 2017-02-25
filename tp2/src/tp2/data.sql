@@ -53,3 +53,37 @@ INSERT INTO Escales VALUES (5, 'Honolulu', 4);
 INSERT INTO Escales VALUES (6, 'Los Angeles', 5);
 INSERT INTO Escales VALUES (7, 'New York', 4);
 INSERT INTO Escales VALUES (8, 'Londres', 3);
+
+
+#EXERCICE2
+
+CREATE TABLE `tp_bdd_isidis`.`employe` ( `id` INT NOT NULL AUTO_INCREMENT , `nom` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`));
+
+#
+# Structure for the `projet` table :
+#
+
+
+create table projet(
+    codeP varchar(4) primary key,
+    nomP varchar(15) not null
+);
+
+#
+# Structure for the `participation` table :
+#
+
+create table participation(
+    matr integer,
+    codeP varchar(4)
+)
+
+ALTER TABLE `participation` ADD CONSTRAINT `fk_emp_part` FOREIGN KEY (`matr`) REFERENCES `tp_bdd_isidis`.`employe`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `participation` ADD CONSTRAINT `fk_projet_part` FOREIGN KEY (`codeP`) REFERENCES `tp_bdd_isidis`.`projet`(`codeP`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `employe` ADD `salaire` INT NOT NULL AFTER `nom`;
+ALTER TABLE `employe` ADD `date_embauche` DATE NOT NULL AFTER `salaire`;
+ALTER TABLE `employe` ADD `id_departement` INT NOT NULL AFTER `date_embauche`;
+
+CREATE TABLE `tp_bdd_isidis`.`departement` ( `id` INT NOT NULL AUTO_INCREMENT , `nom` VARCHAR(100) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+INSERT INTO `tp_bdd_isidis`.`projet` (`codeP`, `nomP`) VALUES ('1', 'Projet Pokémon');
