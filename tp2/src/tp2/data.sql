@@ -32,6 +32,8 @@ INSERT INTO vol VALUES ('AF012','07:58','20:10','Paris Los','Angeles');
 INSERT INTO vol VALUES ('AA118','07:15','13:10','New York','Paris');
 INSERT INTO vol VALUES ('AF001','22:10','12:00','Paris','Tahiti') ;
 INSERT INTO vol VALUES ('PA022','10:12','23:55','Lima','Paris');
+INSERT INTO vol (`NumVol`, `Heure_depart`, `Heure_arrive`, `Ville_depart`, `Ville_arrivee`) VALUES ('AF666', '15:00', '12:00', 'Moscow', 'Paris');
+INSERT INTO vol (`NumVol`, `Heure_depart`, `Heure_arrive`, `Ville_depart`, `Ville_arrivee`) VALUES ('AF667', '09:00', '11:00', 'London', 'Paris');
 
 #
 # Structure for the `Escales` table :
