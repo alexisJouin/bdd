@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date.*;
 
-public class Tp2 {
+public class Exo1 {
 
     private Connection connect;
 
@@ -25,7 +25,7 @@ public class Tp2 {
             System.out.println("Erreur : " + err);
             return null;
         } catch (SQLException ex) {
-            Logger.getLogger(Tp2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Exo1.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -182,11 +182,10 @@ public class Tp2 {
     }
 
     public static void main(String[] args) {
-        Tp2 tp2 = new Tp2();
-//        tp2.Question1();
-//        tp2.Question2("Paris");
-//        tp2.Question3();
-
+        Exo1 exo1 = new Exo1();
+        exo1.Question1();
+        exo1.Question2("Paris");
+        exo1.Question3();
     }
 
 }
