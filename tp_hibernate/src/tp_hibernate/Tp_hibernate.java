@@ -1,18 +1,9 @@
 package tp_hibernate;
 
 import java.util.*;
-import net.sf.ehcache.hibernate.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.cfg.Environment;
-import tp_hibernate.*;
 
-/**
- *
- * @author Alexis
- */
 public class Tp_hibernate {
 
     /**
