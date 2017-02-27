@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 f?vr. 2017 10:14:54 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="tp_hibernate.Grppers" table="grppers" catalog="tp_bdd_hibernate" optimistic-lock="version">
+        <id name="idgrppers" type="java.lang.Integer">
+            <column name="idgrppers" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="groupes" class="tp_hibernate.Groupes" fetch="select">
+            <column name="idgroupe" />
+        </many-to-one>
+        <many-to-one name="personnes" class="tp_hibernate.Personnes" fetch="select">
+            <column name="idpersonne" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
