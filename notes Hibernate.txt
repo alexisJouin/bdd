@@ -1,0 +1,7 @@
+url : jdbc:mysql://localhost:3306/tp_bdd_hibernate?autoReconnect=true&amp;useSSL=false
+
+1)Créer le fichier cfg.xml de configuration
+2)Reveng Engine qui va faire le lien 
+3)POOA
+
+Copier le cfg.cml dans default package

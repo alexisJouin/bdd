@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20 mars 2017 10:37:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="tp_hibernate_new.Entreprise" table="entreprise" catalog="tp_bdd_hibernate" optimistic-lock="version">
+        <id name="idEntreprise" type="java.lang.Integer">
+            <column name="idEntreprise" />
+            <generator class="identity" />
+        </id>
+        <property name="nomEnt" type="string">
+            <column name="nomEnt" length="100" not-null="true" />
+        </property>
+        <property name="listeActivites" type="string">
+            <column name="listeActivites" length="100" not-null="true" />
+        </property>
+        <property name="nbEmployes" type="int">
+            <column name="nbEmployes" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
