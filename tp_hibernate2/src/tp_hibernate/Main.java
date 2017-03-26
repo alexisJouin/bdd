@@ -7,7 +7,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Projections;
 import tp_hibernate_new.Entreprise;
 
 public class Main {
@@ -129,7 +128,6 @@ public class Main {
         query.setParameter("nomEnt", nomEnt);
 
         Iterator it = query.list().iterator();
-        System.out.println("Iterator n° " + it);
 
         entreprise = (Entreprise) it.next();
         displayLine();
@@ -172,6 +170,45 @@ public class Main {
         System.out.println("Nombre d'entreprise : " + nbEntreprises);
     }
 
+    //Exercice 4
+    public static void updateEntreprise() {
+        System.out.println("Saisir l'id de l'entreprise : ");
+        int idEntreprise = Integer.parseInt(sc.nextLine());
+        String hql = "FROM Entreprise WHERE idEntreprise =:idEntreprise";
+        entreprise = new Entreprise();
+
+        Query query = session.createQuery(hql);
+        query.setParameter("idEntreprise", idEntreprise);
+
+        Iterator it = query.list().iterator();
+
+        entreprise = (Entreprise) it.next();
+
+        System.out.println("Saisir le nouveau nom de l'entreprise : ");
+        String nomEnt = sc.nextLine();
+        entreprise.setNomEnt(nomEnt);
+        System.out.println("Mise à jour terminée");
+        displayLine();
+    }
+
+    public static void deleteEntreprise() {
+        System.out.println("Saisir l'id de l'entreprise : ");
+        int idEntreprise = Integer.parseInt(sc.nextLine());
+        String hql = "FROM Entreprise WHERE idEntreprise =:idEntreprise";
+        entreprise = new Entreprise();
+
+        Query query = session.createQuery(hql);
+        query.setParameter("idEntreprise", idEntreprise);
+
+        Iterator it = query.list().iterator();
+
+        entreprise = (Entreprise) it.next();
+        entreprise.setIdEntreprise(idEntreprise);
+        session.delete(entreprise);
+        
+        System.out.println("L'entreprise n°" + idEntreprise + " a bien été supprimé !");
+    }
+
     public static void menu() {
         int choix = 1;
         System.out.println("TP HIBERNATE 2");
@@ -185,6 +222,8 @@ public class Main {
             System.out.println("5) Afficher les infos d'une entreprise [EXO 3]");
             System.out.println("6) Afficher et trier par nombre d'employés les infos des entreprises [EXO 3]");
             System.out.println("7) Afficher le nombre d'entreprises [EXO 3]");
+            System.out.println("8) Mettre à jour une entreprise [EXO 4]");
+            System.out.println("9) Supprimer une entreprise [EXO 4]");
             System.out.println("0) Quitter le programme ");
             displayLine();
             System.out.print("=> ");
@@ -211,6 +250,12 @@ public class Main {
                     break;
                 case 7:
                     getNbEntreprises();
+                    break;
+                case 8:
+                    updateEntreprise();
+                    break;
+                case 9:
+                    deleteEntreprise();
                     break;
             }
         }
