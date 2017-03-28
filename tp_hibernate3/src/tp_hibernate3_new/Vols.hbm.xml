@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 28 mars 2017 20:06:31 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="tp_hibernate3_new.Vols" table="vols" catalog="tp_bdd_hibernate" optimistic-lock="version">
+        <id name="numero" type="int">
+            <column name="numero" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="aeroportByAeroportDepart" class="tp_hibernate3_new.Aeroport" fetch="select">
+            <column name="aeroportDepart" length="10" />
+        </many-to-one>
+        <many-to-one name="aeroportByAeroportArrivee" class="tp_hibernate3_new.Aeroport" fetch="select">
+            <column name="aeroportArrivee" length="10" />
+        </many-to-one>
+        <many-to-one name="compagniesaeriennes" class="tp_hibernate3_new.Compagniesaeriennes" fetch="select">
+            <column name="numCompagnie" />
+        </many-to-one>
+        <property name="jour" type="string">
+            <column name="jour" length="50" />
+        </property>
+        <property name="heureDepart" type="time">
+            <column name="heureDepart" length="8" />
+        </property>
+        <property name="duree" type="time">
+            <column name="duree" length="8" />
+        </property>
+        <property name="capacite" type="java.lang.Integer">
+            <column name="capacite" />
+        </property>
+        <set name="reservationses" table="reservations" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numVol" />
+            </key>
+            <one-to-many class="tp_hibernate3_new.Reservations" />
+        </set>
+        <set name="escaleses" table="escales" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numVol" not-null="true" />
+            </key>
+            <one-to-many class="tp_hibernate3_new.Escales" />
+        </set>
+    </class>
+</hibernate-mapping>
