@@ -20,4 +20,10 @@ public class Camion extends Vehicule {
 		this.capaciteChargement = capaciteChargement;
 	}
 
+	@Override
+	public String toString() {
+		return "Camion [capaciteChargement=" + capaciteChargement + "]";
+	}
+	
+
 }

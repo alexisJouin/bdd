@@ -20,4 +20,9 @@ public class Camionnette extends Vehicule {
 		this.nbPassagers = nbPassagers;
 	}
 
+	@Override
+	public String toString() {
+		return "Camionnette [nbPassagers=" + nbPassagers + "]";
+	}
+
 }
