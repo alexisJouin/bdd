@@ -10,6 +10,7 @@ import java.util.Scanner;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.query.Predicate;
 
 import classes.Camion;
 import classes.Camionnette;
@@ -33,11 +34,11 @@ public class Main {
 	
 	public static void getBasicAttribute() throws ParseException{
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Saisir le numéro d'immatriculation : ");
+		System.out.println("Saisir le numï¿½ro d'immatriculation : ");
 		id = sc.nextLine();
 		System.out.println("Saisir la marque : ");
 		marque = sc.nextLine();
-		System.out.println("Saisir le modèle : ");
+		System.out.println("Saisir le modï¿½le : ");
 		modele = sc.nextLine();
 		System.out.println("Saisir la date de l'achat ('jj/mm/aaaa') : ");
 		dateAchat = sdf.parse(sc.nextLine());
@@ -53,18 +54,18 @@ public class Main {
 		getBasicAttribute();
 		Vehicule v = new Vehicule(id, marque, modele, dateAchat, dateVente, prixAchat, prixVente);
 		db.store(v);
-		System.out.println("Stocké " + v);
+		System.out.println("Stockï¿½ " + v);
 	}
 	
 	public static void addCamion() throws ParseException{
 		getBasicAttribute();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Saisir la capacité de chargement : ");
+		System.out.println("Saisir la capacitï¿½ de chargement : ");
 		int capacite = Integer.parseInt(sc.nextLine());
 		
 		Camion c = new Camion(id, marque, modele, dateAchat, dateVente, prixAchat, prixVente, capacite);
 		db.store(c);
-		System.out.println("Stocké " + c);
+		System.out.println("Stockï¿½ " + c);
 	}
 	
 	public static void addCamionnette() throws ParseException{
@@ -75,7 +76,7 @@ public class Main {
 		
 		Camionnette c = new Camionnette(id, marque, modele, dateAchat, dateVente, prixAchat, prixVente, capacite);
 		db.store(c);
-		System.out.println("Stocké " + c);
+		System.out.println("Stockï¿½ " + c);
 	}
 	
 	public static void listResult(List<?> result){
@@ -86,7 +87,7 @@ public class Main {
 	}
 	
 	public static void displayVehicules(){
-		//Affichage des véhicules
+		//Affichage des vï¿½hicules
 		Vehicule vehicule = new Vehicule(null, null, null, null ,null , 0, 0);
 		ObjectSet result = db.queryByExample(vehicule);
 		listResult(result);
@@ -135,7 +136,7 @@ public class Main {
 			Personne p5 = new Personne(5, "Hammer", "Bertnard");
 			Louer po5 = new Louer(5, "JK 65 BF", sdf.parse("16/07/2006"), dt , 120);
 			
-			//Enregistrement Base de données
+			//Enregistrement Base de donnï¿½es
 			db.store(p1);
 			db.store(po1);
 			db.store(p2);
@@ -154,6 +155,59 @@ public class Main {
 			
 	}
 	
+	public static void exercice5() throws ParseException{
+		Possede possede = new Possede(0,"DC 125 QG", null, 0);
+		ObjectSet<Possede> resultPossede = db.queryByExample(possede);
+		
+		if(resultPossede.size() > 0){
+			int pnum = resultPossede.get(0).getPnum();
+			Personne personne = new Personne(pnum, null, null);
+			ObjectSet<Personne> resultProprietaire = db.queryByExample(personne);
+			System.out.println("PropriÃ©taire de DC 125 QG : ");
+			listResult(resultProprietaire);
+		}
+
+		System.out.println("-----------------------------");
+		
+		possede =  new Possede(0,null, sdf.parse("04/10/2007"), 0);
+		resultPossede = db.queryByExample(possede);
+		if(resultPossede.size() > 0){
+			String idVehicule = resultPossede.get(0).getVeh_id();
+			System.out.println("VÃ©hicule vendu le 04/10/2007 : " + idVehicule);
+		}
+		
+		System.out.println("-----------------------------");
+		
+		List<Vehicule> vehSup40000 = db.query(new Predicate<Vehicule>() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean match(Vehicule arg0) {
+				return arg0.getPrix_achat() > 40000;
+			}
+        });
+		
+		System.out.println("VÃ©hicule avec prix > 40000 : ");
+		listResult(vehSup40000);
+		
+		//Note pour Loic
+		System.out.println("-----------------------------");
+		Personne loic = new Personne(0, null, "Loic");
+		ObjectSet<Personne> resultLoic = db.queryByExample(loic);
+		
+		if(resultLoic.size() > 0){
+			Louer louerLoic = new Louer(resultLoic.get(0).getPnum(),null,null,null,0);
+			ObjectSet<Louer> resultLouerLoic = db.queryByExample(louerLoic);
+			
+			if(resultLouerLoic.size() > 0){
+				long diffInMillies = resultLouerLoic.get(0).getDate_retour().getTime() - resultLouerLoic.get(0).getDate_prise().getTime();
+				long nbDays = diffInMillies/1000/60/60/24;
+				System.out.println("DiffÃ©rence : " + nbDays + " jours.");
+				int note = (int) (nbDays * resultLouerLoic.get(0).getPrix_location());
+				System.out.println("Note pour loic : " + note);
+			}
+		}
+	}
 		
 	public static void main(String[] args) throws ParseException {
 		db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "db.bd4o");
@@ -177,8 +231,9 @@ public class Main {
             System.out.println("1) Ajouter une Voiture");
             System.out.println("2) Ajouter un Camion");
             System.out.println("3) Ajouter une Camionnette");
-            System.out.println("4) Lister les véhicules");
+            System.out.println("4) Lister les vï¿½hicules");
             System.out.println("5) Enregistrements Exercices 4");
+            System.out.println("6) Affichages Exercices 5");
             System.out.println("0) Quitter le programme ");
             displayLine();
             System.out.print("=> ");
@@ -199,6 +254,9 @@ public class Main {
                     break;
                 case 5:
                     exercice4();
+                    break;
+                case 6:
+                    exercice5();
                     break;
             }
         }
