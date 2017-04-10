@@ -163,7 +163,7 @@ public class Main {
 			int pnum = resultPossede.get(0).getPnum();
 			Personne personne = new Personne(pnum, null, null);
 			ObjectSet<Personne> resultProprietaire = db.queryByExample(personne);
-			System.out.println("Propriétaire de DC 125 QG : ");
+			System.out.println("Proprietaire de DC 125 QG : ");
 			listResult(resultProprietaire);
 		}
 
@@ -173,7 +173,7 @@ public class Main {
 		resultPossede = db.queryByExample(possede);
 		if(resultPossede.size() > 0){
 			String idVehicule = resultPossede.get(0).getVeh_id();
-			System.out.println("Véhicule vendu le 04/10/2007 : " + idVehicule);
+			System.out.println("Vehicule vendu le 04/10/2007 : " + idVehicule);
 		}
 		
 		System.out.println("-----------------------------");
@@ -187,7 +187,7 @@ public class Main {
 			}
         });
 		
-		System.out.println("Véhicule avec prix > 40000 : ");
+		System.out.println("Vehicule avec prix > 40000 : ");
 		listResult(vehSup40000);
 		
 		//Note pour Loic
@@ -202,7 +202,7 @@ public class Main {
 			if(resultLouerLoic.size() > 0){
 				long diffInMillies = resultLouerLoic.get(0).getDate_retour().getTime() - resultLouerLoic.get(0).getDate_prise().getTime();
 				long nbDays = diffInMillies/1000/60/60/24;
-				System.out.println("Différence : " + nbDays + " jours.");
+				System.out.println("Difference : " + nbDays + " jours.");
 				int note = (int) (nbDays * resultLouerLoic.get(0).getPrix_location());
 				System.out.println("Note pour loic : " + note);
 			}
@@ -231,7 +231,7 @@ public class Main {
             System.out.println("1) Ajouter une Voiture");
             System.out.println("2) Ajouter un Camion");
             System.out.println("3) Ajouter une Camionnette");
-            System.out.println("4) Lister les v�hicules");
+            System.out.println("4) Lister les vehicules");
             System.out.println("5) Enregistrements Exercices 4");
             System.out.println("6) Affichages Exercices 5");
             System.out.println("0) Quitter le programme ");
