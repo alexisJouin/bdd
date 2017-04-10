@@ -50,6 +50,13 @@ public class Louer {
 	public void setPrix_location(int prix_location) {
 		this.prix_location = prix_location;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Louer [pnum=" + pnum + ", veh_id=" + veh_id + ", date_prise=" + date_prise + ", date_retour="
+				+ date_retour + ", prix_location=" + prix_location + "]";
+	}
 	
 	
 }

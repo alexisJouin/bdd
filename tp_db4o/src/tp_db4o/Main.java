@@ -2,6 +2,7 @@ package tp_db4o;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +13,9 @@ import com.db4o.ObjectSet;
 
 import classes.Camion;
 import classes.Camionnette;
+import classes.Louer;
+import classes.Personne;
+import classes.Possede;
 import classes.Vehicule;
 
 public class Main {
@@ -75,7 +79,7 @@ public class Main {
 	}
 	
 	public static void listResult(List<?> result){
-		System.out.println("Nombre de véhicules :" + result.size());
+		System.out.println("Nombre :" + result.size());
 		for (Object o : result) {
 			System.out.println(o);
 		}
@@ -88,8 +92,65 @@ public class Main {
 		listResult(result);
 	}
 	
+	public static void displayInfosEx4(){
+		//Affichage des Personnes
+		Personne personne = new Personne(0,null,null);
+		ObjectSet result = db.queryByExample(personne);
+		listResult(result);
+		
+		//Affichage des achats
+		Possede possede = new Possede(0, null, null, 0);
+		ObjectSet result1 = db.queryByExample(possede);
+		listResult(result1);
+		
+		//Affichage des locations
+		Louer louer = new Louer(0, null, null, null, 0);
+		ObjectSet result2 = db.queryByExample(louer);
+		listResult(result2);
+	}
+	
 	//Liste des enregistrements de l'exercice 4
-	public static void exercice4(){
+	public static void exercice4() throws ParseException{
+		/*
+			Personne p1 = new Personne(1, "Dupont", "Michel");
+			Possede po1 = new Possede(1, "AB 234 DG", sdf.parse("25/12/2017"), 25000);
+			
+			Personne p2 = new Personne(2, "Gruwez", "Emmanuel");
+			Possede po2 = new Possede(2, "DC 125 QG", sdf.parse("30/05/2008"), 35000);
+			
+			Personne p3 = new Personne(3, "Revillon", "Sonia");
+			Possede po3 = new Possede(3, "JK 65 BF", sdf.parse("04/10/2007"), 35000);
+			
+			Personne p4 = new Personne(4, "Stark", "Loic");
+			Louer po4 = new Louer(4, "GL 37 D", sdf.parse("20/03/2008"), sdf.parse("27/03/2008"), 120);
+			
+			
+			//Pour ajouter 3 jours 
+			Date dt = sdf.parse("16/07/2006");
+			Calendar c = Calendar.getInstance(); 
+			c.setTime(dt); 
+			c.add(Calendar.DATE, 3);
+			dt = c.getTime();
+			
+			Personne p5 = new Personne(5, "Hammer", "Bertnard");
+			Louer po5 = new Louer(5, "JK 65 BF", sdf.parse("16/07/2006"), dt , 120);
+			
+			//Enregistrement Base de données
+			db.store(p1);
+			db.store(po1);
+			db.store(p2);
+			db.store(po2);
+			db.store(p3);
+			db.store(po3);
+			db.store(p4);
+			db.store(po4);
+			db.store(p5);
+			db.store(po5);
+			
+			*/
+		
+			displayInfosEx4();
+			
 			
 	}
 	

@@ -41,5 +41,10 @@ public class Possede {
 	public void setPrix(int prix) {
 		this.prix = prix;
 	}
+
+	@Override
+	public String toString() {
+		return "Possede [pnum=" + pnum + ", veh_id=" + veh_id + ", date=" + date + ", prix=" + prix + "]";
+	}
 	
 }
